@@ -1,9 +1,19 @@
 ---
-layout: post
-title: "Social Housing Can Work"
-subtitle: "If you take it seriously"
-date: 2024-12-20
+author: David Shere
+pubDatetime: 2022-09-23T15:22:00Z
+modDatetime: 2023-12-21T09:12:47.400Z
+title: Social Housing Can Work - If You Take It Seriously
+slug: social-housing-can-work
+featured: true
+draft: false
+tags:
+  - docs
+description:
+  Some rules & recommendations for creating or adding new posts using AstroPaper
+  theme.
+
 ---
+
 Everyone wants to talk about Social Housing, and for good reason! It can be a major key to fixing our housing market and creating real affordable housing.
 
 Unfortunately some advocates are more focused on their ideological hobby horses than actually getting anything done. Ignore them. Social Housing can work - if you take it seriously.
