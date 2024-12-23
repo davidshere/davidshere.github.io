@@ -16,24 +16,17 @@ description:
 
 import FeasibilityCalculator from '../../components/custom/FeasibilityCalculator';
 
-# Development Feasibility Calculator
-
-This interactive calculator helps real estate developers analyze the feasibility of different development scenarios. 
-Enter your target yield and configure the unit mix to see if your project meets your investment criteria.
-
-<FeasibilityCalculator client:load />
-
 Everyone wants to talk about Social Housing, and for good reason! It can be a major key to fixing our housing market and creating real affordable housing.
 
 Unfortunately some advocates are more focused on their ideological hobby horses than actually getting anything done. Ignore them. Social Housing can work - if you take it seriously.
 
-There are a lot of different definitions of Social Housing - mine is that it's a model of housing development where the state plays a bigger role in financing and building housing for the sake of the common good. The housing that gets built is mixed income, including a lot of market rate as well as below market rate. The money from market rate that would have gone into profits instead goes to subsidize the BMR rents.
+There are a lot of different definitions of Social Housing - mine is that it's a model of housing development where the state plays a bigger role in financing, building and operating housing for the sake of the common good. The housing that gets built is mixed income, including a lot of market rate as well as below market rate. The money from market rate that would have gone into profits instead goes to subsidize the BMR rents.
 
 This is as opposed to the for-profit model, where housing only gets built if a private actor believes they can make enough money on it to justify the investment and the risk. (Note that under the current system most "affordable" and "nonprofit" housing still operates under a for-profit model.)
 
-Naturally, even people who agree on this top-level goal - we should do Social Housing - disagree on what it means and how to do it.
+Naturally, even people who agree on this top-level slogan - we should do Social Housing - disagree on what it means and how to do it.
 
-The short version is, if you assume massive subsidies, rents that are too low, and fantasy financing then you're not building anything, you're just navel gazing. BUT if you assume normal buildings conditions with ~50% market rate, you can actually get it done.
+The short version is, if you assume massive subsidies, rents that are too low, and fantasy financing then you're not building anything, you're just navel gazing. BUT if you assume normal buildings conditions, normal BMR rents and a lot of market rate units to pay the way, you can actually get it done.
 
 ## San Francisco's Fantasy Study
 A new report out of San Francisco shows exactly how 
@@ -45,6 +38,12 @@ The City of Berkeley recently commissioned a [similar analysis](https://berkeley
 In some ways, the report is too optimistic and in other ways it's too pessimistic. But it's all governed by a single assumption: That in order for a project to pencil, it needs to achieve a Yield-on-Cost of 6%. That means if you build a building for $1 million, it needs to net $60,000/year in rent or $5,000/month. The consultants looked at a fourplex that cost about $3.2 million to build, but only netted ~$10,500/month - not enough.
 
 BUT! What if you relaxed that 6% assumption? What if the building was built by an entity that cared about housing the community and not returning cash to investors? It turns out that if you don't have to do that six, if you do say one or two percent, not only does a lot more housing pencil BUT it pencils with a lot below market rate units included in the mix.
+
+## Development Feasibility Calculator
+
+To show you what I mean I built this small calculator that you can use to play with the target return and the unit mixes from Berkeley's study. Note that this doesn't capture every assumption and calculation that the consultants did, but it should give you an idea of what could be possible within the confines of this analysis. 
+
+<FeasibilityCalculator client:load />
 
 For example...
 
@@ -72,12 +71,14 @@ With this configuration of units, yield on cost is just over 2%. Note that I hav
 ## The Sticky Wicket: Public Subsidy
 Berkeley's feasability study assumed that 55% of the project would be financed, with the rest coming in as equity. At around $8 million to build, that means the city would have to come up with $3.6 million, or $360,000/unit, OR $600,000/affordable unit. That first number is in the ballpark of what the city pays to build a new unit of affordable housing. That second number is not.
 
-On the other hand, the project would be returning you $164,000/year. Some of that will need to go maintainance and repairs, and some of it could be used to help finance additional building.
+On the other hand, the project would be returning you $164,000/year. A big chunk of that will go to paying the loan at first, and some will need to go maintainance and repairs. Anything left over could be used to help finance additional buildings.
 
 One major challenge here is that housing like this likely wouldn't be eligible for the normal funding sources that affordable housing developers use, since the project wouldn't be 100% affordable. 
 
-And here's the part of Social Housing that I haven't wrapped my head around yet - how do you build it without needing unrealistic amounts of public subsidy? My assumption is that neither Uncle Sam or Uncle Gavin are going to come rain down cash to let us build mixed-income housing. And the whole point of having projects that include market rate is that you can get a cross-subsidy going on.
+And here's the part of Social Housing that I haven't wrapped my head around yet - how do you build it without needing unrealistic amounts of public subsidy? My assumption is that neither Uncle Sam nor Uncle Gavin are going to come rain down cash to let us build mixed-income housing. And the whole point of having projects that include market rate is that you can get a cross-subsidy going on and don't need an ongoing public committment.
 
-Are projects financed 55% with traditional bank loans at 45% with a city bond? And then excess rents go to pay back the bond? Is 60% BMR actually not realistic because you need more cross-subsidy than that?
+Are projects financed 55% with traditional bank loans at 45% with a city bond? And then excess rents go to pay back the debt? Is 60% BMR actually not realistic because you need more cross-subsidy than that?
 
-I'm looking forward to the results _another_ study commissioined by the city that looks at Social Housing in particular. 
+Or maybe you can start with a higher proportion of market rates units and increase the affordable unit count over time as the initial debt is paid off
+
+I'm looking forward to the results _another_ study commissioined by the city that looks at Social Housing in particular. Hopefully it will answer some of these questions and present a path forward. 

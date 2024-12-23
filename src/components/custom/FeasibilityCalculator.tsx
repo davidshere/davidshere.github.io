@@ -180,9 +180,27 @@ const FeasibilityCalculator = () => {
       }
     });
     
-    // Vacancy and expenses
+    // Calculate market rate revenue and unit count separately
+    let marketRateRevenue = 0;
+    let marketRateUnitCount = 0;
+    
+    Object.entries(inputs.marketRateUnits).forEach(([bedType, count]) => {
+      if (config.rents.marketRate[bedType]) {
+        marketRateRevenue += count * config.rents.marketRate[bedType] * 12;
+        marketRateUnitCount += count;
+      }
+    });
+    
+    // Calculate operating expenses based on market rate standards
+    const marketRateOpEx = marketRateRevenue * 0.3;
+    const opExPerUnit = marketRateUnitCount > 0 ? marketRateOpEx / marketRateUnitCount : 0;
+    
+    // Apply the per-unit operating expenses to all units
+    const totalUnits = getTotalUnits();
+    const operatingExpenses = opExPerUnit * totalUnits;
+    
+    // Vacancy still based on total revenue
     const vacancy = totalRevenue * 0.05;
-    const operatingExpenses = totalRevenue * 0.3;
     const noi = totalRevenue - vacancy - operatingExpenses;
     
     // Development costs based on type
@@ -348,13 +366,14 @@ const FeasibilityCalculator = () => {
           </div>
         </CardContent>
       </Card>
+
       <Card className="bg-white">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle>Target Yield on Cost</CardTitle>
           <div className="w-32">
             <input
               type="number"
-              step=".5"
+              step="1"
               min="0"
               className="w-full p-2 border rounded text-right"
               value={targetYield}
@@ -368,6 +387,7 @@ const FeasibilityCalculator = () => {
           </div>
         </CardContent>
       </Card>
+
       <Card>
         <CardHeader>
           <CardTitle>Results</CardTitle>
@@ -379,10 +399,10 @@ const FeasibilityCalculator = () => {
               <div>
                 <div className="text-sm text-gray-500">Yield on Cost</div>
                 <div className={`text-xl font-bold ${results.isFeasible ? 'text-green-600' : 'text-red-600'}`}>
-                  {results.yieldOnCost.toFixed(2)}%
+                  {Math.round(results.yieldOnCost * 100) / 100}%
                 </div>
                 <div className={`text-sm ${results.isFeasible ? 'text-green-600' : 'text-red-600'}`}>
-                  {results.yieldDifference > 0 ? '+' : ''}{results.yieldDifference.toFixed(2)}% vs {targetYield}% target
+                  {results.yieldDifference > 0 ? '+' : ''}{Math.round(results.yieldDifference)}% vs {targetYield}% target
                 </div>
               </div>
             </div>
