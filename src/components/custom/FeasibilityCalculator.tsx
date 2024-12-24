@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/assets/components/ui/card';
+import { Card, CardHeader, CardTitle, CardContent } from 'src/assets/components/ui/card.tsx';
 import { Building2, DollarSign, Percent } from 'lucide-react';
 
 const FeasibilityCalculator = () => {
@@ -36,32 +36,32 @@ const FeasibilityCalculator = () => {
     },
     sixStory: {
       label: '6-Story Midrise',
-      totalUnits: 69,
+      totalUnits: 75,
       bedroomTypes: ['studio', 'oneBed', 'twoBed'],
       rents: {
-        marketRate: { studio: 2500, oneBed: 3300, twoBed: 4400 },
-        lowIncome: { studio: 1800, oneBed: 2096, twoBed: 2332 },
-        veryLowIncome: { studio: 1200, oneBed: 1332, twoBed: 1473 }
+        marketRate: { studio: 2800, oneBed: 3250, twoBed: 4500 },
+        lowIncome: { studio: 1864, oneBed: 2096, twoBed: 2332 },
+        veryLowIncome: { studio: 1195, oneBed: 1332, twoBed: 1473 }
       }
     },
     eightStory: {
       label: '8-Story Midrise',
-      totalUnits: 108,
+      totalUnits: 120,
       bedroomTypes: ['studio', 'oneBed', 'twoBed'],
       rents: {
-        marketRate: { studio: 2600, oneBed: 3400, twoBed: 4500 },
-        lowIncome: { studio: 1800, oneBed: 2096, twoBed: 2332 },
-        veryLowIncome: { studio: 1200, oneBed: 1332, twoBed: 1473 }
+        marketRate: { studio: 2850, oneBed: 3500, twoBed: 4300 },
+        lowIncome: { studio: 1864, oneBed: 2096, twoBed: 2332 },
+        veryLowIncome: { studio: 1195, oneBed: 1332, twoBed: 1473 }
       }
     },
     highRise: {
       label: '18-Story High-rise',
-      totalUnits: 216,
+      totalUnits: 240,
       bedroomTypes: ['studio', 'oneBed', 'twoBed', 'threeBed'],
       rents: {
-        marketRate: { studio: 2800, oneBed: 3600, twoBed: 4700, threeBed: 5800 },
-        lowIncome: { studio: 1800, oneBed: 2096, twoBed: 2332, threeBed: 2569 },
-        veryLowIncome: { studio: 1200, oneBed: 1332, twoBed: 1473, threeBed: 1614 }
+        marketRate: { studio: 3507.209302, oneBed: 3946.22093, twoBed: 4999.090909, threeBed: 6306.976744 },
+        lowIncome: { studio: 1864, oneBed: 2096, twoBed: 2332, threeBed: 2569 },
+        veryLowIncome: { studio: 1195, oneBed: 1332, twoBed: 1473, threeBed: 1614 }
       }
     }
   };
@@ -111,21 +111,34 @@ const FeasibilityCalculator = () => {
     } else if (developmentType === 'fourplex') {
       newInputs.marketRateUnits.twoBed = 4;
     } else if (developmentType === 'multifamily') {
-      newInputs.marketRateUnits.oneBed = 5;
-      newInputs.marketRateUnits.twoBed = 5;
+      newInputs.marketRateUnits.oneBed = 4;
+      newInputs.marketRateUnits.twoBed = 4;
+      newInputs.veryLowIncomeUnits.oneBed = 1;
+      newInputs.lowIncomeUnits.twoBed = 1;
     } else if (developmentType === 'sixStory') {
       newInputs.marketRateUnits.studio = 23;
       newInputs.marketRateUnits.oneBed = 35;
       newInputs.marketRateUnits.twoBed = 11;
+      newInputs.veryLowIncomeUnits.studio = 2;
+      newInputs.veryLowIncomeUnits.oneBed = 3;
+      newInputs.veryLowIncomeUnits.twoBed = 1;
+
     } else if (developmentType === 'eightStory') {
       newInputs.marketRateUnits.studio = 78;
       newInputs.marketRateUnits.oneBed = 20;
       newInputs.marketRateUnits.twoBed = 10;
+      newInputs.veryLowIncomeUnits.studio = 9;
+      newInputs.veryLowIncomeUnits.oneBed = 2;
+      newInputs.veryLowIncomeUnits.twoBed = 1;
     } else if (developmentType === 'highRise') {
-      newInputs.marketRateUnits.studio = 16;
-      newInputs.marketRateUnits.oneBed = 41;
-      newInputs.marketRateUnits.twoBed = 16;
-      newInputs.marketRateUnits.threeBed = 21;
+      newInputs.marketRateUnits.studio = 16 + 27;
+      newInputs.marketRateUnits.oneBed = 41 + 45;
+      newInputs.marketRateUnits.twoBed = 16 + 28;
+      newInputs.marketRateUnits.threeBed = 21 + 22;
+      newInputs.veryLowIncomeUnits.studio = 5;
+      newInputs.veryLowIncomeUnits.oneBed = 10;
+      newInputs.veryLowIncomeUnits.twoBed = 5;
+      newInputs.veryLowIncomeUnits.threeBed = 4;
     }
 
     setInputs(newInputs);
@@ -158,59 +171,87 @@ const FeasibilityCalculator = () => {
   };
 
   const calculate = () => {
+    console.log();
+    console.log(`Calculating feasibility for ${developmentType}...`);
     const config = developmentTypes[developmentType];
     let totalRevenue = 0;
-
-    // Calculate revenue for each unit type and bedroom count
-    Object.entries(inputs.marketRateUnits).forEach(([bedType, count]) => {
-      if (config.rents.marketRate[bedType]) {
-        totalRevenue += count * config.rents.marketRate[bedType] * 12;
-      }
-    });
-
-    Object.entries(inputs.lowIncomeUnits).forEach(([bedType, count]) => {
-      if (config.rents.lowIncome[bedType]) {
-        totalRevenue += count * config.rents.lowIncome[bedType] * 12;
-      }
-    });
-
-    Object.entries(inputs.veryLowIncomeUnits).forEach(([bedType, count]) => {
-      if (config.rents.veryLowIncome[bedType]) {
-        totalRevenue += count * config.rents.veryLowIncome[bedType] * 12;
-      }
-    });
-    
-    // Calculate market rate revenue and unit count separately
     let marketRateRevenue = 0;
     let marketRateUnitCount = 0;
-    
+    let bmrRevenue = 0;
+  
     Object.entries(inputs.marketRateUnits).forEach(([bedType, count]) => {
       if (config.rents.marketRate[bedType]) {
-        marketRateRevenue += count * config.rents.marketRate[bedType] * 12;
+        const revenue = count * config.rents.marketRate[bedType] * 12;
+        marketRateRevenue += revenue;
         marketRateUnitCount += count;
+        console.log(`Market Rate ${bedType}: ${count} units x $${config.rents.marketRate[bedType]} = $${revenue}/year`);
+      }
+    });
+  
+    Object.entries(inputs.lowIncomeUnits).forEach(([bedType, count]) => {
+      if (config.rents.lowIncome[bedType]) {
+        const revenue = count * config.rents.lowIncome[bedType] * 12;
+        bmrRevenue += revenue;  // Add to BMR revenue
+        totalRevenue += revenue;
+        console.log(`Low Income ${bedType}: ${count} units x $${config.rents.lowIncome[bedType]} = $${revenue}/year`);
+      }
+    });
+  
+    Object.entries(inputs.veryLowIncomeUnits).forEach(([bedType, count]) => {
+      if (config.rents.veryLowIncome[bedType]) {
+        const revenue = count * config.rents.veryLowIncome[bedType] * 12;
+        bmrRevenue += revenue;  // Add to BMR revenue
+        totalRevenue += revenue;
+        console.log(`Very Low Income ${bedType}: ${count} units x $${config.rents.veryLowIncome[bedType]} = $${revenue}/year`);
       }
     });
     
-    // Calculate operating expenses based on market rate standards
+  
+    totalRevenue += marketRateRevenue;
+    
+    console.log('\nMarket Rate Summary:');
+    console.log(`Total Market Rate Revenue: $${marketRateRevenue}`);
+    console.log(`Market Rate Unit Count: ${marketRateUnitCount}`);
+    console.log(`Market Rate OpEx (30%): $${marketRateRevenue * 0.3}`);
+    console.log(`OpEx per Unit: $${(marketRateRevenue * 0.3) / marketRateUnitCount}`);
+    
+// Avoid division by zero
+
     const marketRateOpEx = marketRateRevenue * 0.3;
     const opExPerUnit = marketRateUnitCount > 0 ? marketRateOpEx / marketRateUnitCount : 0;
-    
-    // Apply the per-unit operating expenses to all units
     const totalUnits = getTotalUnits();
     const operatingExpenses = opExPerUnit * totalUnits;
-    
-    // Vacancy still based on total revenue
-    const vacancy = totalRevenue * 0.05;
-    const noi = totalRevenue - vacancy - operatingExpenses;
+
+  
+    console.log('\nBMR Summary:');
+    console.log(`Total BMR Revenue: $${bmrRevenue}`);
+    const bmrUnitCount = Object.values(inputs.lowIncomeUnits).reduce((sum, count) => sum + count, 0) +
+                        Object.values(inputs.veryLowIncomeUnits).reduce((sum, count) => sum + count, 0);
+    console.log(`BMR Unit Count: ${bmrUnitCount}`);
+    console.log(`BMR OpEx (using market rate per-unit cost): $${opExPerUnit * bmrUnitCount}`);
+
+    const marketRateVacancy = marketRateRevenue * 0.05; 
+    const bmrVacancy = bmrRevenue * 0.025;
+    const totalVacancy = marketRateVacancy + bmrVacancy;
+    const noi = totalRevenue - totalVacancy - operatingExpenses;
+
+    console.log('\nFinal Numbers:');
+    console.log(`Total Revenue: $${totalRevenue}`);
+    console.log(`Total Units: ${totalUnits}`);
+    console.log(`Market Rate Vacancy (5%): $${marketRateVacancy}`);
+    console.log(`BMR Vacancy (2.5%): $${bmrVacancy}`);
+    console.log(`Total Vacancy: $${totalVacancy}`);
+    console.log(`Operating Expenses: $${operatingExpenses}`);
+    console.log(`NOI: $${noi}`);
     
     // Development costs based on type
     const costs = {
       singleFamily: 3190996,
       fourplex: 3383921,
       multifamily: 7977994,
-      sixStory: 52081102,
-      eightStory: 84124176,
-      highRise: 194518710
+      sixStory: 51823948,
+      eightStory: 84123175,
+      highRise: 194491711
     };
     
     const totalDevelopmentCost = costs[developmentType];
@@ -236,18 +277,18 @@ const FeasibilityCalculator = () => {
       originalUnitsByBedroom.oneBed = 5;
       originalUnitsByBedroom.twoBed = 5;
     } else if (developmentType === 'sixStory') {
-      originalUnitsByBedroom.studio = 23;
-      originalUnitsByBedroom.oneBed = 35;
-      originalUnitsByBedroom.twoBed = 11;
+      originalUnitsByBedroom.studio = 23 + 2;
+      originalUnitsByBedroom.oneBed = 35 + 3;
+      originalUnitsByBedroom.twoBed = 11 + 1;
     } else if (developmentType === 'eightStory') {
-      originalUnitsByBedroom.studio = 78;
-      originalUnitsByBedroom.oneBed = 20;
-      originalUnitsByBedroom.twoBed = 10;
+      originalUnitsByBedroom.studio = 78 + 9;
+      originalUnitsByBedroom.oneBed = 20 + 2;
+      originalUnitsByBedroom.twoBed = 10 + 1;
     } else if (developmentType === 'highRise') {
-      originalUnitsByBedroom.studio = 16;
-      originalUnitsByBedroom.oneBed = 41;
-      originalUnitsByBedroom.twoBed = 16;
-      originalUnitsByBedroom.threeBed = 21;
+      originalUnitsByBedroom.studio = 16 + 27 + 5;
+      originalUnitsByBedroom.oneBed = 41 + 45 + 10;
+      originalUnitsByBedroom.twoBed = 16 +  + 28 + 5;
+      originalUnitsByBedroom.threeBed = 21 + 22+ 4;
     }
     
     return {
