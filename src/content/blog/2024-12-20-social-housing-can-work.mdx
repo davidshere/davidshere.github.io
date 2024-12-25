@@ -1,24 +1,29 @@
 ---
 author: David Shere
-pubDatetime: 2022-09-23T15:22:00Z
-modDatetime: 2023-12-21T09:12:47.400Z
+pubDatetime: 2024-12-23T15:22:00Z
 title: Social Housing Can Work - If You Take It Seriously
 slug: social-housing-can-work
 featured: true
 draft: false
 tags:
-  - docs
+  - social-housing
+  - san-francisco
+  - berkeley
+  - housing
+  - affordable-housing
+  - feasibility
+  - calculators 
 description:
-  Some rules & recommendations for creating or adding new posts using AstroPaper
-  theme.
+  Everyone wants to talk about Social Housing. Everyone says they want to do it. But what are the trade-offs? How do you actually get it done? San Francisco shows how not to do it, but there's a bette way.
 
 ---
-
 import FeasibilityCalculator from '../../components/custom/FeasibilityCalculator';
 
-Everyone wants to talk about Social Housing, and for good reason! It can be a major key to fixing our housing market and creating real affordable housing.
+Everyone wants to talk about Social Housing, and for good reason! It can be a major key to fixing our housing market and creating new affordable housing.
 
 Unfortunately some advocates are more focused on their ideological hobby horses than actually getting anything done. Ignore them. Social Housing can work - if you take it seriously.
+
+__The tl;dr is that you need market rate units and normal BMR rents to make it work out. Skip down to the [feasability calculator](#development-feasibility-calculator) to try out a unit mix yourself__
 
 There are a lot of different definitions of Social Housing - mine is that it's a model of housing development where the state plays a bigger role in financing, building and operating housing for the sake of the common good. The housing that gets built is mixed income, including a lot of market rate as well as below market rate. The money from market rate that would have gone into profits instead goes to subsidize the BMR rents.
 
@@ -26,59 +31,90 @@ This is as opposed to the for-profit model, where housing only gets built if a p
 
 Naturally, even people who agree on this top-level slogan - we should do Social Housing - disagree on what it means and how to do it.
 
-The short version is, if you assume massive subsidies, rents that are too low, and fantasy financing then you're not building anything, you're just navel gazing. BUT if you assume normal buildings conditions, normal BMR rents and a lot of market rate units to pay the way, you can actually get it done.
+The short version is, if you assume massive subsidies, rents that are too low, and fantasy financing then you're not building much of anything, you're just navel gazing. BUT if you assume normal buildings conditions, normal BMR rents and a lot of market rate units to pay the way, you can actually get it done.
 
-## San Francisco's Fantasy Study
-A new report out of San Francisco shows exactly how 
-In the last week or so, Dean Preston, the soon-to-be unemployed YIMBY bête noire out of San Francisco has been posting about Social Housing, including a new report
+# San Francisco's Odd Report
+In the last week or so, Dean Preston, the soon-to-be unemployed YIMBY bête noire out of San Francisco has been [posting](https://bsky.app/profile/deanpreston.bsky.social/post/3ldh2og5tzk27) about Social Housing, including a new report produced by SF's Budget and Legislative Analyst about ["Financial Feasability of Social Housing in San Francisco"](https://image.bos.sfgov.org/lib/fe3f15707564077d741374/m/1/6855a2a8-14ce-4fb3-ab29-19f13b43c88e.pdf). It's a bit of an odd duck - the report details some of the trade-offs necessary to get Social Housing built, and then steadfastly refuses to make them.
 
-## Berkeley's Real-er Study
-The City of Berkeley recently commissioned a [similar analysis](https://berkeleyca.gov/sites/default/files/documents/2024-05-21%20Special%20Item%2001%20Residential%20Feasibility%20Analysis.pdf) - not of Social Housing, but of housing feasability in general. The results are pretty bleak! The topline is that under current conditions, nothing but student housing can get built. You'd need construction or financing costs to come down (good) or rents to go up (bad) in order for anything to pencil. Now, student housing is great, it helps, but it's not enough.
+## The Assumptions
+
+There are a few assumptions that hobble their approach to what they're calling Social Housing:
+
+### Rents are set very low
+Units are categorized in the usual % of AMI buckets for BMR (below market rate) housing, but unlike traditional affordable housing, rents are set at a percent of tenant income. A very low percent of tenant income - 25%. It's true that traditional affordable housing is still quite expensive, and a tenant can remain technically rent-burdened despite living in a subsidized unit. The trade off here is just that the policies considered feasible required large and ongoing subisidies to pencil out, with city taxpayers assuming more than 100% of the cost of developing a building. In a traditional BMR unit with higher rents that number might be closer to 20-30%.
+
+### Interest rates are set very low 
+The report assumes that any feasible scenario requires a low-interest loan provided by city taxpayers, through a mechanism that does not yet exist. The report several times refers to these scenarios as "self-sustaining", which feels odd because even the scenarios where subsidies are counted as a lump sum up front, the taxpayers will still be paying on an ongoing basis, in the form of debt service for the local bonds that funded the public bank that funded the social housing development.
+
+### Assumes zero land costs
+Five of the six scenarios in the report assume that the city already owns the land it wants to build on, and so do not include land acquisition costs in their estimates of total development costs. The one scenario that does include those costs of course has higher per-unit and total subsidies 
+
+### An unreasonable attachment to income-restricted units
+The policies set out in SF's report make two assumptions:
+* Every unit will be income restricted, with no one above 120% of AMI living in the buildings
+* The average % of AMI for tenants in the building will be 80%.
+
+In two separate places, the report describes why this is such an odd constraint:
+
+> For all scenarios, we set the maximum at 120 percent of AMI because that was where we found rents started nearing market rate rents in San Francisco.
+
+> [City] staff report that they have had challenges leasing deed-restricted affordable units to households earning close to 80% of AMI. According to [city] staff, households with incomes near 80 percent of AMI can often afford market rate apartments and choose market rate housing rather than deed-restricted affordable housing because it easier than going through the lengthy and time-consuming requirements of applying for deed-restricted affordable units.
+
+(As an aside - another example of this I heard recently from an affordable housing developer, they said they had trouble leasing BMR studios that weren't guaranteed a parking space, which they were prohibited from providing to all units as a condition for one source of state funding.)
+
+This is an example of activists trying to set policy without listening to the people the policy is ostensibly trying to help. They could reduce operational costs, reduce administrative burdens on tenants and bring in more money to help pay for the low-income units by simply allowing the market rate units that people at 80-120% are saying that they want.
+
+### Assumes higher develoment and operating costs than traditional affordable housing
+The report assumes that any social housing developments will have the same labor and workforce development requirements as other city projects which have prevailing wage, local business enterprise/small business enterprise, and local hire requirements. It also assumes that ongoing operations will be handled by city employees, who have higher wages and benefits than a privately administered project would. This is what's derisively referred to as an "everything bagel" policy, and sure you can do that, but it does result in higher costs, and thus fewer affordable units being built.
+
+## Affordable housing, but make it Social-er
+There's a lot of weird assumptions here but the one that gives away the game is scenario E, which provides a $430,000 up front subsidy to build the new buildings, but uses a commercial loan for the rest rather than a subsidized loan from the city. This is the one scenario they call infeasible. It's not the rents that are set far lower than traditional affordable housing, or the idea that there are no land acquisition costs, or the lack of any market rate housing that makes this scenario unfeasible. It's the simple fact that taxpayers aren't on the hook for every single penny of the development. That tells me all I need to know about the political purpose of this report.
+
+My takeaway from this is that it's not really about building mixed income housing at any sort of scale - just another small, expensive program that scratches an activists' itch but doesn't do much.
+
+The city's Housing Stability Fund is already mostly being spent on traditional affordable housing. These proposals will cost the city in the ballpark of $250,000 more per affordable unit, so the end result would be many fewer BMR units getting built. With rents set only to cover operational costs there's no income stream that can help build more buildings in the future.
+
+The big differences here compared to traditional affordable housing are:
+* Much lower rents
+* Much greater contribution from city taxpayers
+* Somewhat higher development and operational costs
+
+This just doesn't seem like a very sustainable way to build housing at any sort of scale to make an impact. Using the financing mechanisms suggested in the report, in ten years you'd get about 1,350 BMR units, a whopping 1.6% of SF's RHNA allocation for the current cycle - and at a much greater cost to city taxpayers than traditional affordable housing. In the context of RHNA, that's equivalent to Berkeley building 148 units of BMR housing.
+
+At an up front, per-unit subsidy of $430,000, the city could provide an equivalent number of traditional BMR tenants with $1,500/month rent vouchers for the the better part of a century. That would actually cost taxpayers a lot less since they'd still be taking in property taxes and wouldn't have funded the low-interest loans.
+
+# Berkeley's Feasability Study
+The City of Berkeley recently commissioned a [similar analysis](https://berkeleyca.gov/sites/default/files/legislative-body-meeting-agendas/2024-12-02%20HAC%20Agenda_PACKET_Revised.pdf#page=27) - not of Social Housing, but of housing feasability in general.
+
+It's pretty bleak! The topline is that under current conditions, nothing but student housing can get built. You'd need construction or financing costs to come down (good) or rents to go up (bad) in order for anything to pencil. Now, student housing is great, it helps, but it's not enough.
 
 In some ways, the report is too optimistic and in other ways it's too pessimistic. But it's all governed by a single assumption: That in order for a project to pencil, it needs to achieve a Yield-on-Cost of 6%. That means if you build a building for $1 million, it needs to net $60,000/year in rent or $5,000/month. The consultants looked at a fourplex that cost about $3.2 million to build, but only netted ~$10,500/month - not enough.
 
 BUT! What if you relaxed that 6% assumption? What if the building was built by an entity that cared about housing the community and not returning cash to investors? It turns out that if you don't have to do that six, if you do say one or two percent, not only does a lot more housing pencil BUT it pencils with a lot below market rate units included in the mix.
 
-## Development Feasibility Calculator
+## <a name="development-feasibility-calculator"></a> Development Feasibility Calculator
 
 To show you what I mean I built this small calculator that you can use to play with the target return and the unit mixes from Berkeley's study. Note that this doesn't capture every assumption and calculation that the consultants did, but it should give you an idea of what could be possible within the confines of this analysis. 
 
-<FeasibilityCalculator client:load />
+<FeasibilityCalculator client:only="react" />
 
 For example...
 
-### 10-Unit Multifamily Property
-If you assume a 2% yield on cost, with the same development assumptions as the for-profit estimate, you can make a ten unit pencil at 60% below market rate.
+### 8-Story Midrise
+If you assume a 2.5% yield on cost, with the same development assumptions as the for-profit estimate, you can make a 120-unit building pencil at 37% BMR, with 2/3 of those being Very Low Income units, 
 
-#### 1 Bedroom Units
+![alt text](image.png)
 
-| Unit Type | Unit Count | Monthly Rent |
-|-----------|------------|--------------|
-| Market Rate | 2          | $3,000       |
-| 80% AMI  | 1          | $2,096       |
-| 50% AMI       | 2          | $1,332       |
-
-#### 2 Bedroom Units
-
-| Unit Type | Unit Count | Monthly Rent |
-|-----------|------------|--------------|
-| Market Rate        | 2          | $4,100       |
-| 80% AMI        | 2          | $2,332       |
-| 50% AMI       | 1          | $1,473       |
-
-With this configuration of units, yield on cost is just over 2%. Note that I haven't changed any other assumptions - land costs, construction costs, even financing costs are all the same. So instead of assuming 1% loans from...some place...this project could go get a regular bank loan and pay regular bank interest.
+Note that I haven't changed any assumptions other than the necessary return - land costs, construction costs, even financing costs are all the same. So instead of assuming 1% loans from...some place...this project could go get a regular bank loan and pay regular bank interest.
 
 ## The Sticky Wicket: Public Subsidy
-Berkeley's feasability study assumed that 55% of the project would be financed, with the rest coming in as equity. At around $8 million to build, that means the city would have to come up with $3.6 million, or $360,000/unit, OR $600,000/affordable unit. That first number is in the ballpark of what the city pays to build a new unit of affordable housing. That second number is not.
 
-On the other hand, the project would be returning you $164,000/year. A big chunk of that will go to paying the loan at first, and some will need to go maintainance and repairs. Anything left over could be used to help finance additional buildings.
+Both SF and Berkeley's studies imply one major hurdle for anyone who wants to advocate for social housing - under today's policy regime, cities are going to spend more money on social housing and get fewer affordable units, compared to traditional affordable housing. That's because even with all the hurdles and delays and expenses of traditional affordable housing, city money is mixed with private, state and federal money to get it built. But under current policy, it is difficult or impossible to use those sources for mixed-income housing.
 
-One major challenge here is that housing like this likely wouldn't be eligible for the normal funding sources that affordable housing developers use, since the project wouldn't be 100% affordable. 
+### The need for state and regional funds
 
-And here's the part of Social Housing that I haven't wrapped my head around yet - how do you build it without needing unrealistic amounts of public subsidy? My assumption is that neither Uncle Sam nor Uncle Gavin are going to come rain down cash to let us build mixed-income housing. And the whole point of having projects that include market rate is that you can get a cross-subsidy going on and don't need an ongoing public committment.
+Anyone who wants to see social housing in the Bay Area as anything more than a vanity or pilot program needs to advocate that Sacramento change eligibility requirements, AND needs to advocate for the Bay Area Housing Finance Authority to guarantee that any funds made available from any future bond are made available to government-owned mixed income housing. Financing arrangements need to be flexible and responsive to the actual needs of cities trying to make mixed-income housing work.
 
-Are projects financed 55% with traditional bank loans at 45% with a city bond? And then excess rents go to pay back the debt? Is 60% BMR actually not realistic because you need more cross-subsidy than that?
-
-Or maybe you can start with a higher proportion of market rates units and increase the affordable unit count over time as the initial debt is paid off
+San Francisco and Berkeley are both wealthy communities that can afford to build social housing on their own. There are also many, many other needs that taxpayers will be asked to cover in the coming decades. If we can augment local funds with existing state or new regional funds to finance social housing, it would make it a lot easier to get a lot more built.
 
 I'm looking forward to the results _another_ study commissioined by the city that looks at Social Housing in particular. Hopefully it will answer some of these questions and present a path forward. 
