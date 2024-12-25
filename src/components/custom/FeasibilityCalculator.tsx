@@ -67,6 +67,7 @@ const FeasibilityCalculator = () => {
   };
 
   const [developmentType, setDevelopmentType] = useState('singleFamily');
+  const [isEditing, setIsEditing] = useState(false);
   const [targetYield, setTargetYield] = useState(6.0);
   const [inputs, setInputs] = useState({
     marketRateUnits: {
@@ -170,6 +171,12 @@ const FeasibilityCalculator = () => {
     return totals;
   };
 
+  const bmrPercentage = Math.round(
+    (Object.values(inputs.lowIncomeUnits).reduce((sum, count) => sum + count, 0) + 
+     Object.values(inputs.veryLowIncomeUnits).reduce((sum, count) => sum + count, 0)) / 
+     getTotalUnits() * 100
+  );
+
   const calculate = () => {
     console.log();
     console.log(`Calculating feasibility for ${developmentType}...`);
@@ -206,7 +213,6 @@ const FeasibilityCalculator = () => {
       }
     });
     
-  
     totalRevenue += marketRateRevenue;
     
     console.log('\nMarket Rate Summary:');
@@ -243,6 +249,8 @@ const FeasibilityCalculator = () => {
     console.log(`Total Vacancy: $${totalVacancy}`);
     console.log(`Operating Expenses: $${operatingExpenses}`);
     console.log(`NOI: $${noi}`);
+    
+
     
     // Development costs based on type
     const costs = {
@@ -396,17 +404,75 @@ const FeasibilityCalculator = () => {
           </div>
         </CardContent>
       </Card>
-
       <Card>
-        <CardHeader>
-          <CardTitle>Unit Mix</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-6">
-            {renderUnitInputs()}
-          </div>
-        </CardContent>
-      </Card>
+  <CardHeader className="pb-2">
+    <div className="flex justify-between items-center">
+      <CardTitle>Unit Mix</CardTitle>
+      <div className="flex items-center space-x-2">
+        <Percent className="w-4 h-4 text-blue-500" />
+        <div>
+          <div className="text-sm text-gray-500">BMR Units</div>
+          <div className="text-lg font-bold text-right">{bmrPercentage}%</div>
+        </div>
+      </div>
+    </div>
+    <button 
+      onClick={() => setIsEditing(!isEditing)}
+      className="mt-2 text-sm px-4 py-2 rounded-md bg-blue-50 border border-blue-200 text-blue-600 hover:bg-blue-100 font-medium w-full sm:w-auto"
+    >
+      {isEditing ? 'View Summary' : 'Edit Unit Mix'}
+    </button>
+  </CardHeader>
+  <CardContent>
+    {isEditing ? (
+      // Existing editing interface
+      <div className="space-y-6">
+        {renderUnitInputs()}
+      </div>
+    ) : (
+<div className="overflow-x-auto">
+  <table className="w-full border-collapse">
+    <thead>
+      <tr>
+        <th className="text-left py-3 px-4 border-b-2 border-gray-200 bg-gray-50 font-medium text-gray-600">Unit Type</th>
+        <th className="text-right py-3 px-4 border-b-2 border-gray-200 bg-gray-50 font-medium text-gray-600">Market Rate</th>
+        <th className="text-right py-3 px-4 border-b-2 border-gray-200 bg-gray-50 font-medium text-gray-600">Low Income</th>
+        <th className="text-right py-3 px-4 border-b-2 border-gray-200 bg-gray-50 font-medium text-gray-600">Very Low Income</th>
+        <th className="text-right py-3 px-4 border-b-2 border-gray-200 bg-gray-50 font-medium text-gray-600">Total</th>
+        <th className="text-right py-3 px-4 border-b-2 border-gray-200 bg-gray-50 font-medium text-gray-600">Required</th>
+      </tr>
+    </thead>
+    <tbody>
+      {developmentTypes[developmentType].bedroomTypes.map(bedType => {
+        const totalUnits = results.unitsByBedroom[bedType];
+        const requiredUnits = results.originalUnitsByBedroom[bedType];
+        const isValid = totalUnits === requiredUnits;
+        
+        return (
+          <tr key={bedType} className="hover:bg-gray-50">
+            <td className="py-3 px-4 border-b border-gray-200 font-medium">
+              {bedType === 'studio' ? 'Studio' : 
+               bedType === 'oneBed' ? '1 Bedroom' :
+               bedType === 'twoBed' ? '2 Bedroom' : '3 Bedroom'}
+            </td>
+            <td className="text-right py-3 px-4 border-b border-gray-200">{inputs.marketRateUnits[bedType]}</td>
+            <td className="text-right py-3 px-4 border-b border-gray-200">{inputs.lowIncomeUnits[bedType]}</td>
+            <td className="text-right py-3 px-4 border-b border-gray-200">{inputs.veryLowIncomeUnits[bedType]}</td>
+            <td className={`text-right py-3 px-4 border-b border-gray-200 font-medium ${isValid ? 'text-green-600' : 'text-red-600'}`}>
+              {totalUnits}
+            </td>
+            <td className="text-right py-3 px-4 border-b border-gray-200 text-gray-500">
+              {requiredUnits}
+            </td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+</div>
+    )}
+  </CardContent>
+</Card>
 
       <Card className="bg-white">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -414,7 +480,7 @@ const FeasibilityCalculator = () => {
           <div className="w-32">
             <input
               type="number"
-              step="1"
+              step="0.5"
               min="0"
               className="w-full p-2 border rounded text-right"
               value={targetYield}
@@ -430,46 +496,46 @@ const FeasibilityCalculator = () => {
       </Card>
 
       <Card>
-        <CardHeader>
-          <CardTitle>Results</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="flex items-center space-x-4">
-              <DollarSign className="w-8 h-8 text-green-500" />
-              <div>
-                <div className="text-sm text-gray-500">Yield on Cost</div>
-                <div className={`text-xl font-bold ${results.isFeasible ? 'text-green-600' : 'text-red-600'}`}>
-                  {Math.round(results.yieldOnCost * 100) / 100}%
-                </div>
-                <div className={`text-sm ${results.isFeasible ? 'text-green-600' : 'text-red-600'}`}>
-                  {results.yieldDifference > 0 ? '+' : ''}{Math.round(results.yieldDifference)}% vs {targetYield}% target
-                </div>
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-4">
-              <DollarSign className="w-8 h-8 text-blue-500" />
-              <div>
-                <div className="text-sm text-gray-500">Net Operating Income</div>
-                <div className="text-xl font-bold">
-                  ${results.noi.toLocaleString()}
-                </div>
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-4">
-              <Building2 className="w-8 h-8 text-purple-500" />
-              <div>
-                <div className="text-sm text-gray-500">Total Development Cost</div>
-                <div className="text-xl font-bold">
-                  ${results.totalDevelopmentCost.toLocaleString()}
-                </div>
-              </div>
-            </div>
+  <CardHeader>
+    <CardTitle>Results</CardTitle>
+  </CardHeader>
+  <CardContent>
+    <div className="flex flex-col sm:flex-row gap-6">
+      <div className="flex items-center space-x-4 flex-1">
+        <DollarSign className="w-8 h-8 text-green-500" />
+        <div>
+          <div className="text-sm text-gray-500">Yield on Cost</div>
+          <div className={`text-xl font-bold ${results.isFeasible ? 'text-green-600' : 'text-red-600'}`}>
+            {Math.round(results.yieldOnCost * 100) / 100}%
           </div>
-        </CardContent>
-      </Card>
+          <div className={`text-sm ${results.isFeasible ? 'text-green-600' : 'text-red-600'}`}>
+            {results.yieldDifference > 0 ? '+' : ''}{Math.round(results.yieldDifference)}% vs {targetYield}% target
+          </div>
+        </div>
+      </div>
+
+      <div className="flex items-center space-x-4 flex-1">
+        <DollarSign className="w-8 h-8 text-blue-500" />
+        <div>
+          <div className="text-sm text-gray-500">Net Operating Income</div>
+          <div className="text-xl font-bold">
+            ${results.noi.toLocaleString()}
+          </div>
+        </div>
+      </div>
+
+      <div className="flex items-center space-x-4 flex-1">
+        <Building2 className="w-8 h-8 text-purple-500" />
+        <div>
+          <div className="text-sm text-gray-500">Total Development Cost</div>
+          <div className="text-xl font-bold">
+            ${results.totalDevelopmentCost.toLocaleString()}
+          </div>
+        </div>
+      </div>
+    </div>
+  </CardContent>
+</Card>
     </div>
   );
 };
