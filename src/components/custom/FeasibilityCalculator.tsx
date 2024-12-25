@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from 'src/assets/components/ui/card.tsx';
+import { Card, CardHeader, CardTitle, CardContent } from '@assets/components/ui/card.tsx';
 import { Building2, DollarSign, Percent } from 'lucide-react';
 
 const FeasibilityCalculator = () => {
